@@ -1,11 +1,8 @@
-import { Button } from "@/components/ui/button";
+import LinkAccountButton from "@/components/link-account-button";
 
 export default async function Home() {
   return (
-    <>
-      <h1 className="text-red-600">Jai Chintapurni Maa</h1>
-      <Button>OM</Button>
-    </>
+    <LinkAccountButton /> 
   );
 }
  
