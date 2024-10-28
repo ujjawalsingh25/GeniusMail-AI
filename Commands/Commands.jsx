@@ -53,11 +53,11 @@
     // npx shadcn@latest add breadcrumb      -->> Breadcrumb                    |
     // npx shadcn@latest add button          -->> Button                        |
     // npx shadcn@latest add calendar        -->> Calendar                      |
-    // npx shadcn@latest add card            -->> Card                          |\                 
+    // npx shadcn@latest add card            -->> Card                          |                 
     // npx shadcn@latest add input         -->> UI                              |
     // npx shadcn@latest add tooltip       -->> Hints adding                    |
     // npx shadcn@latest add skeleton      -->> Skeleton/LayoutModel            |
-    // npx shadcn@latest add switch        -->> Toggle / Switching              |\
+    // npx shadcn@latest add switch        -->> Toggle / Switching              |
     // npx shadcn@latest add slider        -->> Slider                          |
     // npx shadcn@latest add separator      -->> Separator                      |
     // npx shadcn@latest add scroll-area   -->> Scroll-Area                     |
@@ -65,6 +65,8 @@
     // npx shadcn@latest add label          -->> Label                          | 
     // npx shadcn@latest add textarea          -->> Textarea                    | 
     // npx shadcn@latest add select        -->> Select                          |
+    //npx shadcn@latest add resizable      -->> Resizable                       |
+    //npx shadcn@latest add separator      -->> Resizable                       |
 //    ------------------------------------------------------------------------- |
 //      -----  Data Table  ----------                                           |
 //    ------------------------------------------------------------------------- |

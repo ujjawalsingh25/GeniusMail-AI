@@ -10,7 +10,7 @@ export class Account {
 
     // private async startSync(daysWithin: number): Promise<SyncResponse> {
     private async startSync() {
-        const response = await axios.post<SyncResponse>( `https://api.aurinko.io/v1/email/sync`, {}, {
+        const response = await axios.post<SyncResponse>( 'https://api.aurinko.io/v1/email/sync', {}, {
             headers: { 
                 Authorization: `Bearer ${this.token}` 
             }, 
@@ -29,7 +29,7 @@ export class Account {
         let params: Record<string, string> = {};
         if (deltaToken) params.deltaToken = deltaToken;
         if (pageToken) params.pageToken = pageToken;
-        const response = await axios.get<SyncUpdatedResponse>(`https://api.aurinko.io/v1/email/sync/updated`, {
+        const response = await axios.get<SyncUpdatedResponse>('https://api.aurinko.io/v1/email/sync/updated', {
             headers: { 
                 Authorization: `Bearer ${this.token}` 
             },
