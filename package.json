@@ -53,10 +53,13 @@
     "react-dom": "^18.3.1",
     "react-resizable-panels": "^2.1.6",
     "server-only": "^0.0.1",
+    "sonner": "^1.7.0",
     "superjson": "^2.2.1",
     "svix": "^1.37.0",
     "tailwind-merge": "^2.5.4",
     "tailwindcss-animate": "^1.0.7",
+    "toast": "^0.5.4",
+    "usehooks-ts": "^3.1.0",
     "zod": "^3.23.3"
   },
   "devDependencies": {

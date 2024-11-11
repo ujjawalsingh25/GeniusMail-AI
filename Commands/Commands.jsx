@@ -138,3 +138,6 @@
 // npm i axios
 // npm i @vercel/functions
 // npm i p-limit
+// npm i usehooks-ts
+// npm i lucide-react 
+// npm i sonner
