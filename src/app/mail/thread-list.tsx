@@ -11,10 +11,6 @@ import { Badge } from '@/components/ui/badge';
 const ThreadList = () => {
   const { threads, threadId, setThreadId } = useThreads();
 
-  // const [threadId, setThreadId] = useThread();
-  // const [parent] = useAutoAnimate(/* optional config */);
-  // const { selectedThreadIds, visualMode } = useVim();
-
   const groupedThreads = threads?.reduce((acc, thread) => {
     const date = format(thread.emails[0]?.sentAt ?? new Date(), "yyyy-MM-dd");
     if (!acc[date]) {

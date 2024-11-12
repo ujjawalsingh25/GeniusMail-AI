@@ -66,6 +66,7 @@
     // npx shadcn@latest add textarea          -->> Textarea                    | 
     // npx shadcn@latest add select        -->> Select                          |
     //npx shadcn@latest add resizable      -->> Resizable                       |
+    //npx shadcn@latest add dropdown-menu      -->> DropDown Menu               |
     //npx shadcn@latest add separator      -->> Resizable                       |
 //    ------------------------------------------------------------------------- |
 //      -----  Data Table  ----------                                           |
@@ -145,3 +146,5 @@
 // npm i dompurify
 // npm i @types/dompurify
 // npm i jotai
+// npm i react-avatar
+// npm i react-letter

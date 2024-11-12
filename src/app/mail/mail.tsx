@@ -10,6 +10,7 @@ import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs';
 import Sidebar from './sidebar';
 import { cn } from '@/lib/utils';
 import ThreadList from './thread-list';
+import ThreadDisplay from './thread-display';
 
 type Props = {
     defaultLayout: number[] |   undefined
@@ -88,7 +89,7 @@ const Mail = ({ defaultLayout = [20,32,48], navCollapsedSize, defaultCollapsed }
             <ResizableHandle withHandle />
 
             <ResizablePanel defaultSize={defaultLayout[1]} minSize={30}>
-                Thread Display
+                <ThreadDisplay />   {/*  ThreadDisplay */}
             </ResizablePanel>
         </ResizablePanelGroup>
     </TooltipProvider> 
