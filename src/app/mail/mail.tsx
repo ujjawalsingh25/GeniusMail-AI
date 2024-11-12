@@ -1,12 +1,15 @@
 "use client";
 import React, { useState } from 'react';
+
+import AccountSwitcher from './account-switcher';
+import { Separator } from '@/components/ui/separator';
 import { TooltipProvider } from '@/components/ui/tooltip';
 import { ResizableHandle, ResizablePanel, ResizablePanelGroup} from '@/components/ui/resizable';
-import { cn } from '@/lib/utils';
-import { Separator } from '@/components/ui/separator';
 import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs';
-import AccountSwitcher from './account-switcher';
+
 import Sidebar from './sidebar';
+import { cn } from '@/lib/utils';
+import ThreadList from './thread-list';
 
 type Props = {
     defaultLayout: number[] |   undefined
@@ -75,10 +78,10 @@ const Mail = ({ defaultLayout = [20,32,48], navCollapsedSize, defaultCollapsed }
                     {/* Search Bar */}
                     Search Bar
                     <TabsContent value='inbox'>
-                        inbox
+                        <ThreadList />
                     </TabsContent>
                     <TabsContent value='done'>
-                        done
+                        <ThreadList />
                     </TabsContent>
                 </Tabs>
             </ResizablePanel>

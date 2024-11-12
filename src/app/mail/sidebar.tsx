@@ -11,7 +11,7 @@ type Props = {isCollapsed: boolean}
 
 const Sidebar = ({isCollapsed}: Props) => {
     const [accountId] = useLocalStorage("accountId", "");
-    const [tab] = useLocalStorage("geniusMail-tab", "inbox");
+    const [tab] = useLocalStorage("normalhuman-tab", "inbox");
 
     const refetchInterval = 5000
     const { data: inboxThreads } = api.account.getNumThreads.useQuery({
