@@ -12,6 +12,7 @@ import {
   SignedOut,
   UserButton
 } from '@clerk/nextjs'
+import KBar from "@/components/kbar";
 
 export const metadata: Metadata = {
   title: "Create T3 App",
@@ -24,7 +25,11 @@ export default function RootLayout({children,}: Readonly<{ children: React.React
     <ClerkProvider>
       <html lang="en" className={`${GeistSans.variable}`}>
         <body>
-          <TRPCReactProvider>{children}</TRPCReactProvider>
+          <TRPCReactProvider>
+            <KBar>
+              {children}
+            </KBar>
+          </TRPCReactProvider>
         </body>
       </html>
     </ClerkProvider>

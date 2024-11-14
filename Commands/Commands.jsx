@@ -136,6 +136,8 @@
 // npm i @tabler/icons-react                                                                            |
 // _____________________________________________________________________________________________________|
 
+// npm i kbar
+
 // npm i axios
 // npm i @vercel/functions
 // npm i p-limit
@@ -148,3 +150,5 @@
 // npm i jotai
 // npm i react-avatar
 // npm i react-letter
+// npm i framer-motion
+// npm i next-themes  
