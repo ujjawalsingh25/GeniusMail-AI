@@ -10,6 +10,7 @@ import { Button } from '@/components/ui/button';
 import { Separator } from '@/components/ui/separator';
 import { Avatar, AvatarFallback, AvatarImage } from '@/components/ui/avatar';
 import { DropdownMenu, DropdownMenuContent, DropdownMenuItem, DropdownMenuTrigger } from '@/components/ui/dropdown-menu';
+import ReplyBox from './reply-box';
 
 const ThreadDisplay = () => {
     const { threadId, threads } = useThreads()
@@ -96,7 +97,7 @@ const ThreadDisplay = () => {
             <div className="flex-1"></div>
             <Separator className="mt-auto" />
             {/* ReplyBox */}
-            ReplyBox
+            <ReplyBox />
           </div>
         ) : (
           <>

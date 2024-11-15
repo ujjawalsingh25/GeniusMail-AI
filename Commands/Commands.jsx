@@ -152,3 +152,6 @@
 // npm i react-letter
 // npm i framer-motion
 // npm i next-themes  
+
+// npm i @tiptap/react @tiptap/starter-kit @tiptap/extension-text
+// npm i react-select
