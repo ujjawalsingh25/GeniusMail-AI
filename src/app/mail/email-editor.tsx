@@ -1,11 +1,14 @@
 'use client';
 
-import React, { useState } from 'react';
+import { readStreamableValue } from 'ai/rsc';
 import { Text } from '@tiptap/extension-text';
 import { StarterKit } from '@tiptap/starter-kit';
+import AiComposeButton from './ai-compose-button';
+import React, { useEffect, useState } from 'react';
 import { EditorContent, useEditor } from '@tiptap/react';
 
 import TagInput from './tag-input';
+import { generate } from './action';
 import EditorMenuBar from './editor-menubar';
 import { Input } from '@/components/ui/input';
 import { Button } from '@/components/ui/button';
@@ -41,12 +44,23 @@ const EmailEditor = ({
     const [value, setValue] = useState<string>('')
     // const [expanded, setExpanded] = useState<boolean>(defaultToolbarExpand);
     const [expanded, setExpanded] = useState(defaultToolbarExpand ?? false);
+    const [token, setToken] = useState<string>('')
+
+    const aiGenerate = async (value: string) => {
+        const { output } = await generate(value)
+        for await (const token of readStreamableValue(output)) {
+            if (token) {
+                setToken(token);
+            }
+        }
+    }    
 
     const customText = Text.extend({
         addKeyboardShortcuts() {
             return {
                 "Meta-j": () => {           // control+'j' -->> it will automatically writes the suggestion
-                    console.log('Meta-j')
+                    // console.log('Meta-j')
+                    aiGenerate(this.editor.getText());
                     return true;
                 },
             };
@@ -65,8 +79,17 @@ const EmailEditor = ({
             setValue(editor.getHTML())
         }
     });
-
     if(!editor) return null;
+
+    // useEffect(() => {
+    //     editor?.commands?.insertContent(token);
+    // }, [token, editor]);
+    
+    const onGenerate = (token: string) => {
+        // console.log(token);
+        editor?.commands?.insertContent(token)
+    }
+    
 
     return (
         <div>
@@ -107,6 +130,10 @@ const EmailEditor = ({
                             to {to.join(', ')}
                         </span>
                     </div>
+                    <AiComposeButton 
+                        isComposing={defaultToolbarExpand}
+                        onGenerate={onGenerate}
+                    />
                 </div>
             </div>
 

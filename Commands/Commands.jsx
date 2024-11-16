@@ -62,6 +62,7 @@
     // npx shadcn@latest add separator      -->> Separator                      |
     // npx shadcn@latest add scroll-area   -->> Scroll-Area                     |
     // npx shadcn@latest add dialog        -->> Dialogs                         | 
+    // npx shadcn@latest add drawer       -->> Drawer                           | 
     // npx shadcn@latest add label          -->> Label                          | 
     // npx shadcn@latest add textarea          -->> Textarea                    | 
     // npx shadcn@latest add select        -->> Select                          |
@@ -152,6 +153,12 @@
 // npm i react-letter
 // npm i framer-motion
 // npm i next-themes  
+// npm i turndown
+// npm i @types/turndown
 
 // npm i @tiptap/react @tiptap/starter-kit @tiptap/extension-text
 // npm i react-select
+
+
+// AI
+// npm i @ai-sdk/openai ai
