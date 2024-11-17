@@ -1,9 +1,15 @@
-import { UserButton } from '@clerk/nextjs'
-import dynamic from 'next/dynamic'
 import React from 'react'
-import ComposeButton from './compose-button'
-
+import dynamic from 'next/dynamic'
+import { UserButton } from '@clerk/nextjs'
 // import Mail from './mail'
+// import ComposeButton from './compose-button'
+
+const ComposeButton = dynamic(() => {
+  return import('./compose-button')
+}, {
+  ssr: false
+})
+
 const Mail = dynamic(() => {
   return import('./mail')
 }, {

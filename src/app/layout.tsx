@@ -13,6 +13,7 @@ import {
   UserButton
 } from '@clerk/nextjs'
 import KBar from "@/components/kbar";
+import { Toaster } from "sonner";
 
 export const metadata: Metadata = {
   title: "Create T3 App",
@@ -28,6 +29,7 @@ export default function RootLayout({children,}: Readonly<{ children: React.React
           <TRPCReactProvider>
             <KBar>
               {children}
+              <Toaster />
             </KBar>
           </TRPCReactProvider>
         </body>
