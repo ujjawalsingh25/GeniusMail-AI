@@ -162,3 +162,5 @@
 
 // AI
 // npm i @ai-sdk/openai ai
+
+// npm i @orama/orama @orama/plugin-data-persistence

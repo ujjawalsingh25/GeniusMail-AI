@@ -1,14 +1,30 @@
-import { db } from '@/server/db';
-import type { SyncUpdatedResponse, EmailMessage, EmailAddress, EmailAttachment, EmailHeader } from './types';
 import pLimit from "p-limit";
+import { db } from '@/server/db';
+import { turndown } from './turndown';
+import { OramaClient } from './orama';
+import type { SyncUpdatedResponse, EmailMessage, EmailAddress, EmailAttachment, EmailHeader } from './types';
 
 
 export async function syncEmailsToDatabase(emails: EmailMessage[], accountId: string) {
     console.log(`Syncing ${emails.length} emails to database`);
     const limit = pLimit(10);   // Process up to 10 emails concurrently
+
+    const orama = new OramaClient(accountId)
+    await orama.initialize()
+
     try {
         // Promise.all(emails.map((email, index) => upsertEmail(email, accountId, index)));
         for(const email of emails) {
+            const body = turndown.turndown(email.body ?? email.bodySnippet ?? "")
+            await orama.insert({
+                subject: email.subject,
+                body: body,
+                from: email.from.address,
+                rawBody: email.bodySnippet ?? "",
+                to: email.to.map(to => to.address),
+                sentAt: email.sentAt.toLocaleString(),
+                threadId: email.threadId
+            })
             await upsertEmail(email, accountId, 0);
         }
     } catch (error) {

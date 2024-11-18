@@ -11,6 +11,7 @@ import Sidebar from './sidebar';
 import { cn } from '@/lib/utils';
 import ThreadList from './thread-list';
 import ThreadDisplay from './thread-display';
+import SearchBar from './components/search-bar';
 
 type Props = {
     defaultLayout: number[] |   undefined
@@ -77,7 +78,7 @@ const Mail = ({ defaultLayout = [20,32,48], navCollapsedSize, defaultCollapsed }
 
                     <Separator />
                     {/* Search Bar */}
-                    Search Bar
+                    <SearchBar />
                     <TabsContent value='inbox'>
                         <ThreadList />
                     </TabsContent>
