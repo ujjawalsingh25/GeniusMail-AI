@@ -3,6 +3,7 @@ import { db } from '@/server/db';
 import { turndown } from './turndown';
 import { OramaClient } from './orama';
 import type { SyncUpdatedResponse, EmailMessage, EmailAddress, EmailAttachment, EmailHeader } from './types';
+import { getEmbeddings } from "./embeddings";
 
 
 export async function syncEmailsToDatabase(emails: EmailMessage[], accountId: string) {
@@ -16,6 +17,7 @@ export async function syncEmailsToDatabase(emails: EmailMessage[], accountId: st
         // Promise.all(emails.map((email, index) => upsertEmail(email, accountId, index)));
         for(const email of emails) {
             const body = turndown.turndown(email.body ?? email.bodySnippet ?? "")
+            const embeddings = await getEmbeddings(body)
             await orama.insert({
                 subject: email.subject,
                 body: body,
@@ -23,7 +25,8 @@ export async function syncEmailsToDatabase(emails: EmailMessage[], accountId: st
                 rawBody: email.bodySnippet ?? "",
                 to: email.to.map(to => to.address),
                 sentAt: email.sentAt.toLocaleString(),
-                threadId: email.threadId
+                threadId: email.threadId,
+                embeddings
             })
             await upsertEmail(email, accountId, 0);
         }
