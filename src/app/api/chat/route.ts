@@ -1,18 +1,45 @@
+import { auth } from "@clerk/nextjs/server";
 import { Configuration, OpenAIApi } from "openai-edge";
 import { Message, OpenAIStream, StreamingTextResponse } from "ai";
-import { auth } from "@clerk/nextjs/server";
+
 import { OramaClient } from "@/lib/orama";
+import { db } from "@/server/db";
+import { FREE_CREDITS_PER_DAY } from "@/constants";
+import { getSubscriptionStatus } from "@/lib/stripe-actions";
 
 const openai = new OpenAIApi(new Configuration ({
     apiKey: process.env.OPENAI_API_KEY,
 }));
 
 export async function POST(req: Request) {
+    const today = new Date().toDateString()
     try {
         const { userId } = await auth()
         if (!userId) {
             return new Response("Unauthorized", { status: 401 });
         }
+
+        const isSubscribed = await getSubscriptionStatus()
+        if (!isSubscribed) {
+            const chatbotInteraction = await db.chatbotInteraction.findUnique({
+                where: {
+                    day: today,
+                    userId
+                }
+            })
+            if (!chatbotInteraction) {
+                await db.chatbotInteraction.create({
+                    data: {
+                        day: today,
+                        count: 1,
+                        userId
+                    }
+                })
+            } else if (chatbotInteraction.count >= FREE_CREDITS_PER_DAY) {
+                return new Response("Limit reached" , { status: 429 });
+            }
+        }
+
         const { messages, accountId } = await req.json();
         const orama = new OramaClient(accountId)
         await orama.initialize()
@@ -54,7 +81,18 @@ export async function POST(req: Request) {
                 // console.log('Stream Started');
             },
             onCompletion: async (completion) => {
-                console.log('Stream Completed', completion);
+                // console.log('Stream Completed', completion);
+                await db.chatbotInteraction.update({
+                    where: {
+                        userId,
+                        day: today
+                    },
+                    data: {
+                        count: {
+                            increment: 1
+                        }
+                    }
+                })
             },
         });
         return new StreamingTextResponse(stream);

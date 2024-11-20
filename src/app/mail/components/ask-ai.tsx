@@ -1,14 +1,19 @@
 'use client';
 
-import React, { useEffect } from 'react';
-import { AnimatePresence, motion } from 'framer-motion';
-import { cn } from '@/lib/utils';
-import { Send, SparklesIcon } from 'lucide-react';
+import { toast } from 'sonner';
 import { useChat } from 'ai/react'
+import React, { useEffect } from 'react';
+import { Send, SparklesIcon } from 'lucide-react';
+import { AnimatePresence, motion } from 'framer-motion';
+
+import { cn } from '@/lib/utils';
+import { api } from '@/trpc/react';
 import useThreads from '@/hooks/use-threads';
+import PremiumBanner from './premium-banner';
 
 const AskAI = ({ isCollapsed }: { isCollapsed: boolean }) => {
     const { accountId } = useThreads();
+    const utils = api.useUtils()
 
     const { input, handleInputChange, handleSubmit, messages } = useChat({
         api: "/api/chat",
@@ -16,7 +21,10 @@ const AskAI = ({ isCollapsed }: { isCollapsed: boolean }) => {
             accountId,
         },
         onError: (error) => {
-            console.log(error);
+            toast.error(error.message);
+        },
+        onFinish: () => {
+            utils.account.getChatbotInteraction.refetch()
         },
         initialMessages: [],
     });
@@ -34,6 +42,7 @@ const AskAI = ({ isCollapsed }: { isCollapsed: boolean }) => {
     if (isCollapsed) return null;
     return (
         <div className='p-4 mb-14'>
+            <PremiumBanner />
             <div className="h-4"></div>
             <motion.div className="flex flex-1 flex-col items-end justify-end pb-4 
                 border p-4 rounded-lg bg-gray-100 shadow-inner dark:bg-gray-900">

@@ -158,6 +158,7 @@
 
 // npm i @tiptap/react @tiptap/starter-kit @tiptap/extension-text
 // npm i react-select
+//  npm i stripe
 
 
 // AI
