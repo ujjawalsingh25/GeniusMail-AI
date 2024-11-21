@@ -1,10 +1,4 @@
 import "@/styles/globals.css";
-
-import { GeistSans } from "geist/font/sans";
-import { type Metadata } from "next";
-
-import { TRPCReactProvider } from "@/trpc/react";
-
 import {
   ClerkProvider,
   SignInButton,
@@ -12,8 +6,13 @@ import {
   SignedOut,
   UserButton
 } from '@clerk/nextjs'
-import KBar from "@/components/kbar";
 import { Toaster } from "sonner";
+import { type Metadata } from "next";
+import { GeistSans } from "geist/font/sans";
+
+import KBar from "@/components/kbar";
+import { TRPCReactProvider } from "@/trpc/react";
+import { ThemeProvider } from "@/components/theme-provider";
 
 export const metadata: Metadata = {
   title: "Create T3 App",
@@ -26,12 +25,19 @@ export default function RootLayout({children,}: Readonly<{ children: React.React
     <ClerkProvider>
       <html lang="en" className={`${GeistSans.variable}`}>
         <body>
-          <TRPCReactProvider>
-            <KBar>
-              {children}
-              <Toaster />
-            </KBar>
-          </TRPCReactProvider>
+          <ThemeProvider 
+            attribute='class' 
+            defaultTheme='system' 
+            enableSystem 
+            disableTransitionOnChange
+          >
+            <TRPCReactProvider>
+              <KBar>
+                {children}
+                <Toaster />
+              </KBar>
+            </TRPCReactProvider>
+        </ThemeProvider>
         </body>
       </html>
     </ClerkProvider>

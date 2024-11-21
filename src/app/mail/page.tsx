@@ -1,6 +1,7 @@
 import React from 'react'
 import dynamic from 'next/dynamic'
 import { UserButton } from '@clerk/nextjs'
+import { ThemeToggle } from '@/components/theme-toggle'
 // import Mail from './mail'
 // import ComposeButton from './compose-button'
 
@@ -21,6 +22,7 @@ const MailDashboard = () => {
     <>
       <div className="absolute bottom-4 left-4">
         <div className="flex items-center gap-2">
+          <ThemeToggle />
           <UserButton />
           <ComposeButton />
         </div>  
